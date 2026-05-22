@@ -194,6 +194,20 @@ public class UsuarioService {
         );
     }
 
+    public UsuarioResponseDTO
+    obtenerPorUsername(
+            String username) {
+
+        UsuarioEntity usuario =
+                usuarioRepository
+                        .findByUsername(username)
+                        .orElseThrow(() ->
+                                new UsuarioNoEncontradoException(
+                                        "Usuario no encontrado"));
+
+        return toResponseDTO(usuario);
+    }
+
     public UsuarioAuthDTO findByUsernameForAuth(
             String username) {
 

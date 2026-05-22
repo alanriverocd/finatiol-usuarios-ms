@@ -3,6 +3,7 @@ package com.finatiol.usuarios.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -178,6 +179,15 @@ public class UsuarioController {
             Authentication authentication) {
 
         return authentication.getAuthorities();
+    }
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<UsuarioResponseDTO>
+    obtenerPorUsername(
+            @PathVariable String username) {
+
+        return ResponseEntity.ok(
+                usuarioService.obtenerPorUsername(username));
     }
 
     @GetMapping("/auth/{username}")
