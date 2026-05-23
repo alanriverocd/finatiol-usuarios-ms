@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.finatiol.usuarios.client.NotificacionClient;
+import com.finatiol.usuarios.dto.EmailRequestDTO;
 import com.finatiol.usuarios.dto.UsuarioAuthDTO;
 import com.finatiol.usuarios.dto.UsuarioRequestDTO;
 import com.finatiol.usuarios.dto.UsuarioResponseDTO;
@@ -27,10 +29,14 @@ public class UsuarioService {
     private final RolRepository
             rolRepository;
 
+    private final NotificacionClient
+            notificacionClient;
+
     public UsuarioService(
             UsuarioRepository usuarioRepository,
             PasswordEncoder passwordEncoder,
-            RolRepository rolRepository) {
+            RolRepository rolRepository,
+            NotificacionClient notificacionClient) {
 
         this.usuarioRepository =
                 usuarioRepository;
@@ -40,6 +46,9 @@ public class UsuarioService {
 
         this.rolRepository =
                 rolRepository;
+
+        this.notificacionClient =
+                notificacionClient;
     }
 
     public UsuarioResponseDTO crearUsuario(
@@ -65,6 +74,23 @@ public class UsuarioService {
 
         UsuarioEntity usuarioGuardado =
                 usuarioRepository.save(usuario);
+
+        EmailRequestDTO email =
+                new EmailRequestDTO();
+
+        email.setDestinatario(
+                usuarioGuardado.getEmail());
+
+        email.setAsunto(
+                "Bienvenido a FINATIOL");
+
+        email.setMensaje(
+                "Hola "
+                + usuarioGuardado.getNombre()
+                + ", tu usuario fue creado correctamente.");
+
+        notificacionClient
+                .enviarEmail(email);
 
         return toResponseDTO(usuarioGuardado);
     }
