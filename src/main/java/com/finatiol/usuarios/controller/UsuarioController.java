@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.finatiol.usuarios.constants.SuccessCodes;
-import com.finatiol.usuarios.constants.SuccessMessages;
+import com.finatiol.common.constants.usuarios.SuccessCodes;
+import com.finatiol.common.constants.usuarios.SuccessMessages;
 import com.finatiol.usuarios.dto.ApiResponse;
 import com.finatiol.usuarios.dto.UsuarioAuthDTO;
 import com.finatiol.usuarios.dto.UsuarioRequestDTO;
