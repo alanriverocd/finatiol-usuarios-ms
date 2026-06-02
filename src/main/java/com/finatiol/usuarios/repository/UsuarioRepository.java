@@ -16,4 +16,7 @@ public interface UsuarioRepository
 
     boolean existsByUsername(
             String username);
+
+    boolean existsByEmailIgnoreCase(
+            String email);
 }
