@@ -43,9 +43,10 @@ public class SecurityConfig {
                 .exceptionHandling(ex ->
                         ex.authenticationEntryPoint((request, response, e) -> {
                             response.setStatus(401);
-                            response.setContentType("application/json");
+                            response.setContentType("application/json;charset=UTF-8");
+                            response.setCharacterEncoding("UTF-8");
                             response.getWriter().write(
-                                    "{\"code\":\"AUTH-001\",\"message\":\"Token de autenticación requerido o inválido\"}");
+                                    "{\"code\":\"AUTH-001\",\"message\":\"Token de autenticaci\u00f3n requerido o inv\u00e1lido\"}");
                         })
                 );
 
