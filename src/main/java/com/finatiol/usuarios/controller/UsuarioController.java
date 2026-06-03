@@ -175,7 +175,6 @@ public class UsuarioController {
     }
 
     @GetMapping("/resumen")
-    @PreAuthorize("hasAuthority('USUARIO_VER')")
     public ResponseEntity<Long> resumen() {
         return ResponseEntity.ok(
                 (long) usuarioService.listarUsuarios().size());
